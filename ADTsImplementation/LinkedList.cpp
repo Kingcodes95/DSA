@@ -8,9 +8,10 @@ class Node {
 void printLinkedList(Node* n) {
     // Check if n because if it hits the last not it won't run the function because it == nullptr
     while (n != nullptr) {
-        std::cout << n->data << std::endl;
+        std::cout << n->data << " ";
         n = n->next;
     }
+    std::cout << '\n';
 }
 void AddToEnd(Node* n, int value) {
     //traverse to the last node using the next value
@@ -81,6 +82,31 @@ void DeleteNodeValue(Node*& head, int value) {
     // Delete excess memory
     delete temp;
 }
+void BubbleSort(Node* head) {
+    if (head == nullptr) { std::cout << "List is empty\n"; return; }
+
+    
+    bool swapped;               // Bool to check if elements are being swapped
+    Node* ptr1;                 // This pointer will traverse the list
+    Node* lptr = nullptr;       // This pointer will mark the sorted portion of the list, "lptr" is built in
+
+    do {                        // Main Loop: only works if items are being swapped.
+        swapped = false;
+        ptr1 = head;
+
+        while (ptr1->next != lptr) { // Inner While Loop: we stop looping after lptr because everything after is already sorted
+            if (ptr1->data > ptr1->next->data) { // While the Data for the pointer value is greater than the next nodes value
+                std::swap(ptr1->data, ptr1->next->data);
+                swapped = true;
+            }
+        
+            ptr1 = ptr1->next;  // Then move to the next values
+
+        }
+
+        lptr = ptr1; // sets the sorted list to the next number so we don't touch the old values
+    } while (swapped);
+}
 int main() {
 
     // These create a new node
@@ -89,19 +115,21 @@ int main() {
     Node* third = new Node();
     Node* fourth = new Node();
 
-    head->data = 10;
+    head->data = 40;
     head->next = second;
-    second->data = 20;
+    second->data = 32;
     second->next = third;
-    third->data = 30;
+    third->data = 10;
     third->next = fourth;
-    fourth->data = 40;
+    fourth->data = 188;
     fourth->next = nullptr;
 
     //AddToEnd(head, 50);
     //AddToFront(head, 5);
     //AddAfterNode(head, 30, 15);
     //DeleteNodeValue(head, 30);
+    printLinkedList(head);
+    BubbleSort(head);
     printLinkedList(head);
 
     return 0;
