@@ -4,6 +4,7 @@ class Node {
     public:
         int data;
         Node* next;
+
 };
 void printLinkedList(Node* n) {
     // Check if n because if it hits the last not it won't run the function because it == nullptr
@@ -107,6 +108,34 @@ void BubbleSort(Node* head) {
         lptr = ptr1; // sets the sorted list to the next number so we don't touch the old values
     } while (swapped);
 }
+void SortedInsertion(Node*& sorted, Node* newNode) { // sorted is the head of the list, newNode is the new node to be inserted
+    if (sorted == nullptr || sorted->data >= newNode->data) {  // Checks the condition if sorted is empty or greater than the newNode
+        newNode->next = sorted; // Points new node to the sorted
+        sorted = newNode;       // makes newNode the new head of the list cause its being inserted in the front
+    } else {
+        // if the if condition fails then you need to start from the head of the sorted list to find the correct insertion
+        Node* current = sorted;
+        while (current->next != nullptr && current->next->data < newNode->data) {
+            current = current->next;
+        }
+        // Insert newNode between current and current->next
+        newNode->next = current->next;
+        current->next = newNode;
+    }
+}
+void InsertionSort(Node*& head) {
+    Node* sorted = nullptr; // Start with an empty sorted list
+    Node* current = head;   // Pointer to traverse the original unsorted list
+
+    while (current != nullptr) {
+        Node* next = current->next;
+        SortedInsertion(sorted, current); // Insert the current node into the sorted List
+        current = next;
+    }
+
+    head = sorted;
+
+}
 int main() {
 
     // These create a new node
@@ -129,7 +158,8 @@ int main() {
     //AddAfterNode(head, 30, 15);
     //DeleteNodeValue(head, 30);
     printLinkedList(head);
-    BubbleSort(head);
+    //BubbleSort(head);
+    InsertionSort(head);
     printLinkedList(head);
 
     return 0;
