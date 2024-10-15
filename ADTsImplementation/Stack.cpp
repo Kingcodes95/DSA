@@ -7,6 +7,7 @@
 // -> display, operation to view the stack
 
 #include <iostream>
+#include <vector>
 
 class Node {
     public:
@@ -86,18 +87,53 @@ class Stack {
             std::cout << std::endl;
         }
 
+        int popAndReturn() {
+            if (isEmpty()) {
+                std::cout << "Stack is empty" << std::endl;
+                return -1;
+            }
+
+            int TopValue = top->value;
+            pop();
+            return TopValue;
+        }
+
+        void BubbleSortStack() {
+            std::vector<int> arr;
+            while (!isEmpty()) {
+                arr.push_back(popAndReturn());
+            }
+            int n = arr.size();
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n - 1 - i; j++) {
+                    if (arr[j] < arr[j + 1]) {
+                        std::swap(arr[j], arr[j + 1]);
+                    }
+                }
+            }
+            // Push the array back to the stack;
+            for (int i = 0; i < n; i++) {
+                push(arr[i]);
+            }
+        }
 };
 int main() {
 
     Stack stack;
 
     stack.push(10);
+    stack.push(9);
     stack.push(20);
     stack.push(30);
+    stack.push(12);
+    stack.push(32);
 
-    stack.peek();
-    stack.pop();
-    stack.peek();
+    //stack.peek();
+    //stack.pop();
+    //stack.peek();
+    
+    //stack.display();
+    stack.BubbleSortStack();
     stack.display();
 
     return 0;
