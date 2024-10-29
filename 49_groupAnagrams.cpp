@@ -24,3 +24,12 @@ public:
         return answer;
     }
 };
+
+// 1. Create a unordered_map that holds string and another vector of strings
+// 2. create a for loop for x in string
+// 3. create variable word = x
+// 4. sort the word
+// 5. for that x in the vector insert the word to the correct one
+// 6. create a vector for the answer
+// 7. for each x in map map.push_back(x.second)
+// 8. return the ans vector

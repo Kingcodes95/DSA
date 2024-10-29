@@ -53,3 +53,20 @@ public:
         return result;
     }
 };
+
+
+// 1. First need to set a dummyHead node to 0 so we have a result Head Node
+// 2. Then need to initialize a tail node and set it to the dummyHead to keep track of
+// the last node
+// 3. Need to set up a variable for the carry over value (incase a value adds to over 10)
+// 4. in a while loop check each value for l1, l2, carry and add them together to
+// variable sum
+// 5. Then take the sum value and divide it by module % 10 to get the remainder and set
+// to a new variable digit
+// 6. carry will be sum divided by 10 to get the carry over value
+// 7. Create a newNode with digit as the value
+// 8. set tail to point to the newNode and then tail to the next value
+// 9. then check l1 and l2 to either next or nullptr
+// 10. create new result node and set dummyhead.next to it
+// 11. delete the dummy node
+// 12. return result
