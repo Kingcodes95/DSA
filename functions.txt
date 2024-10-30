@@ -1,0 +1,4 @@
+c++ built in functions
+
+.substr(start_index, length) // extracts a portion (substring) of a string: start_index = substring begins, length = characters to include
+gdc(a, b) // returns the largest integer without a remainder. a, b = integers
