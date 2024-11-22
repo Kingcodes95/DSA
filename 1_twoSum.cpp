@@ -1,24 +1,26 @@
-#include <vector>
-#include <iostream>
-#include <unordered_map>
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> numMap;
 
-// Most efficent way to solve this was Hashmap, O(n) where n is the size of the array.
-//unordered_map, unordered_set.
+        // Iterate thru vector nums
+        for (int i = 0; i < nums.size(); i++) {
+            
+            // for each iteration we create a complement value 
+            // the complement value is target - nums[i]
+            // so basically if the first value is 2 the complement would be 9 - 2 = 7
+            int complement = target - nums[i];
 
-int main() {
+            // then for that current complement we want to check if the key exists for that value in the current
+            // numMap, if it exists then we return, if it doens't exist we move forward
 
-    std::vector<int> nums = {7, 2, 11, 15};
-    int target = 9;
+            if (numMap.find(complement) != numMap.end()) {
+                return {numMap[complement], i}; // this would return the index of the key and the indecie of the current value
+            }
 
-    std::unordered_map<int, int> numMaps; //Map to store numbers and their indices(targets basically)
-    for (int i = 0; i < nums.size(); i++) { // for loop to iterate thru each number
-        int complement = target - nums[i]; // complement is the target - nums[i], the values in the list so you complement + nums = target
-        if (numMaps.find(complement) != numMaps.end()) {
-            return {numMaps[complement], i}; // indinces found (not incorrect on leetcode)
+            numMap[nums[i]] = i;
         }
-        numMaps[nums[i]] = i; // add current member to map.
+
+        return {};
     }
-
-    return {};
-
-}
+};
